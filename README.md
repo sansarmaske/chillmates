@@ -1,1 +1,1 @@
-# kosadecks
+# No nonsense finance tracker
