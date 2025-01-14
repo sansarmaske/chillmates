@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/expenses', function () {return view('expenses.index');})->name('expenses');
     Route::get('/expenses/create', function () {return view('expenses.create');})->name('expenses.create');
+    Route::post('/expenses', function () {return view('expenses.create');})->name('expenses.create');
 });
 
 
