@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->decimal('amount', 8, 2);
             $table->text('description')->nullable();
