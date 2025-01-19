@@ -12,7 +12,7 @@ class ExpenseController extends Controller
     //
     public function index()
     {
-        $expenses = Expense::where('user_id', Auth::id())->get();
+        $expenses = Expense::where('user_id', Auth::id())->with('user')->latest()->get();
         return view('expenses.index')->with('expenses', $expenses);
     }
 
@@ -39,8 +39,6 @@ class ExpenseController extends Controller
 
         Session::flash('message', 'Expense added');
         return redirect(route('expenses'));
-
-
     }
 
     public function edit(Expense $expense)
@@ -48,22 +46,41 @@ class ExpenseController extends Controller
         return view('expenses.edit')->with('expense', $expense);
     }
 
-    public function destroy(Expense $expense)
+    public function update(Expense $expense)
     {
-        dd($expense->user);
-        if($expense->user->isNot(Auth::user()->id)){
+
+
+        request()->validate([
+            'title' => 'required',
+            'amount' => 'required|numeric',
+            'description' => 'nullable',
+        ]);
+
+
+
+
+        if ($expense->user->isNot(Auth::user())) {
             abort(403);
         }
 
-        //todo: check if the user is the owner of the record
+        $expense->update([
+            'title' => request('title'),
+            'amount' => request('amount'),
+            'description' => request('description'),
+        ]);
 
+        Session::flash('message', 'Record has been updated');
+        return redirect(route('expenses'));
+    }
 
-
+    public function destroy(Expense $expense)
+    {
+        if ($expense->user->isNot(Auth::user())) {
+            abort(403);
+        }
         $expense->delete();
 
         Session::flash('message', 'Record has been deleted');
         return redirect(route('expenses'));
     }
-
-
 }
