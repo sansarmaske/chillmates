@@ -56,9 +56,6 @@ class ExpenseController extends Controller
             'description' => 'nullable',
         ]);
 
-
-
-
         if ($expense->user->isNot(Auth::user())) {
             abort(403);
         }
