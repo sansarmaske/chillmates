@@ -10,38 +10,16 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <h2 class="font-bold text-lg mb-10">Edit </h2>
+                    <h2 class="font-bold text-lg mb-10">Edit Category</h2>
 
-                    <form action="{{route('expenses.update', $expense->id)}}" method="POST">
+                    <form action="{{route('categories.update', $category->id)}}" method="POST">
                         @csrf
                         @method('PATCH')
                         <div class="mb-4">
                             <label for="title" class="sr-only"">Title</label>
-                            <input type="text" name="title" id="title" placeholder="Title" class="bg-gray-100 w-full p-4 rounded-sm @error('title') border-red-500 @enderror" value="{{$expense->title}}">
+                            <input type="text" name="name" id="name" placeholder="Name" class="bg-gray-100 w-full p-4 rounded-sm @error('name') border-red-500 @enderror" value="{{$category->name}}">
 
-                            @error('title')
-                                <div class="text-red-500 mt-2 text-sm">
-                                    {{$message}}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="amount" class="sr-only">Amount</label>
-                            <input type="text" name="amount" id="amount" placeholder="Amount" class="bg-gray-100 w-full p-4 rounded-sm @error('amount') border-red-500 @enderror" value="{{$expense->amount}}">
-
-                            @error('amount')
-                                <div class="text-red-500 mt-2 text-sm">
-                                    {{$message}}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="description" class="sr-only">Description</label>
-                            <textarea name="description" id="description" cols="30" rows="4" placeholder="Description" class="bg-gray-100 w-full p-4 rounded-sm @error('description') border-red-500 @enderror">{{$expense->description}}</textarea>
-
-                            @error('description')
+                            @error('name')
                                 <div class="text-red-500 mt-2 text-sm">
                                     {{$message}}
                                 </div>
@@ -49,7 +27,7 @@
                         </div>
 
                         <div>
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Update Expense</button>
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Update Category</button>
                         </div>
 
 
