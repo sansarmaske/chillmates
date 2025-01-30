@@ -15,6 +15,7 @@ class Expense extends Model
         'amount',
         'description',
         'user_id',
+        'category_id',
     ];
 
     public function user()

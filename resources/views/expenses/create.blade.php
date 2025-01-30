@@ -14,6 +14,27 @@
 
                     <form action="{{route('expenses.store')}}" method="POST">
                         @csrf
+
+                        <div class="mb-4">
+                            <label for="category" class="sr-only">Category</label>
+                            <select name="category" id="category" class="bg-gray-100 w-full p-4 rounded-sm @error('category') border-red-500 @enderror">
+                                <option value="">Select Category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>)
+
+                                @endforeach
+
+
+                            </select>
+
+                            @error('category')
+                                <div class="text-red-500 mt-2 text-sm">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                        </div>
+
+
                         <div class="mb-4">
                             <label for="title" class="sr-only">Title</label>
                             <input type="text" name="title" id="title" placeholder="Title" class="bg-gray-100 w-full p-4 rounded-sm @error('title') border-red-500 @enderror" value="{{old('title')}}">

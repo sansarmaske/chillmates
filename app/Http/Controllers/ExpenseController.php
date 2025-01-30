@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Models\Category;
 
 
 class ExpenseController extends Controller
@@ -12,25 +13,37 @@ class ExpenseController extends Controller
     //
     public function index()
     {
-        $expenses = Expense::where('user_id', Auth::id())->with('user')->latest()->get();
+        $expenses = Expense::where('user_id', Auth::id())->with('user', 'category')->latest()->get();
         return view('expenses.index')->with('expenses', $expenses);
     }
 
     public function create()
     {
-        return view('expenses.create');
+        $categories = Category::where('user_id', Auth::id())->get();
+        return view('expenses.create')->with('categories', $categories);
     }
 
     public function store()
     {
 
         request()->validate([
+            'category' => 'required',
+            'category' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!Category::where('id', $value)->where('user_id', Auth::id())->exists()) {
+                        $fail('The selected category is invalid.');
+                    }
+                },
+            ],
             'title' => 'required',
             'amount' => 'required|numeric',
             'description' => 'nullable',
         ]);
 
+
         Expense::create([
+            'category_id' => request('category'),
             'title' => request('title'),
             'amount' => request('amount'),
             'description' => request('description'),
