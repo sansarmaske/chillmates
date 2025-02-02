@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Group;
 
 
+
 class ExpenseController extends Controller
 {
     //
@@ -17,6 +18,17 @@ class ExpenseController extends Controller
         $expenses = Expense::where('user_id', Auth::id())->with('user', 'category', 'group')->latest()->get();
         return view('expenses.index')->with('expenses', $expenses);
     }
+
+    public function family()
+    {
+
+        $expenses = Expense::where('group_id', Auth::user()->groups->firstWhere('type', 'family')->id)->with('user', 'category', 'group')->latest()->get();
+
+
+        return view('expenses.index')->with('expenses', $expenses);
+    }
+
+
 
     public function create()
     {

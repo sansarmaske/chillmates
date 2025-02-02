@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/expenses/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
     Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
 
+    Route::get('/expenses/family', [ExpenseController::class, 'family'])->name('expenses.family');
+
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');

@@ -39,6 +39,9 @@
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Group</th>
+                                        <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Created By</th>
 
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -56,6 +59,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $expense->description }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $expense->category->name }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $expense->group->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $expense->user->name }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $expense->created_at->diffForHumans() }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
