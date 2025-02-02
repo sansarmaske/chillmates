@@ -6,6 +6,7 @@ use App\Models\Expense;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\Category;
+use App\Models\Group;
 
 
 class ExpenseController extends Controller
@@ -19,15 +20,28 @@ class ExpenseController extends Controller
 
     public function create()
     {
+
+        $groups =  Group::where('user_id', Auth::id())->get();
+
         $categories = Category::where('user_id', Auth::id())->get();
-        return view('expenses.create')->with('categories', $categories);
+        return view('expenses.create')->with([
+            'categories' => $categories,
+            'groups' => $groups
+        ]);
     }
 
     public function store()
     {
 
         request()->validate([
-            'category' => 'required',
+            'group' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!Group::where('id', $value)->where('user_id', Auth::id())->exists()) {
+                        $fail('The selected group is invalid.');
+                    }
+                },
+            ],
             'category' => [
                 'required',
                 function ($attribute, $value, $fail) {
@@ -43,6 +57,7 @@ class ExpenseController extends Controller
 
 
         Expense::create([
+            'group_id' => request('group'),
             'category_id' => request('category'),
             'title' => request('title'),
             'amount' => request('amount'),
