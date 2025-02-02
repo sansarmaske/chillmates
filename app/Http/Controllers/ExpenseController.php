@@ -14,7 +14,7 @@ class ExpenseController extends Controller
     //
     public function index()
     {
-        $expenses = Expense::where('user_id', Auth::id())->with('user', 'category')->latest()->get();
+        $expenses = Expense::where('user_id', Auth::id())->with('user', 'category', 'group')->latest()->get();
         return view('expenses.index')->with('expenses', $expenses);
     }
 

@@ -29,5 +29,10 @@ class Expense extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+
 
 }
