@@ -12,8 +12,6 @@ class UserObserver
     public function created(User $user): void
     {
 
-
-
         $user->groups()->create([
             'name' => 'Personal',
             'type' => 'personal',

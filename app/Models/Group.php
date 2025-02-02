@@ -14,10 +14,11 @@ class Group extends Model
         'name',
         'type',
         'user_id',
+
     ];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
 }

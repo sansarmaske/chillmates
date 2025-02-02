@@ -21,12 +21,14 @@ class GroupController extends Controller
 
         //todo: check if user already belongs to a group with same name
 
-
-        Group::create([
+        $group = Group::create([
             'name' => $name,
             'type' => request('type'),
             'user_id' => Auth::id(),
         ]);
+        $group->users()->attach(Auth::id());
+
+
         Session::flash('message', 'Family has been enabled');
 
         return redirect()->route('dashboard');

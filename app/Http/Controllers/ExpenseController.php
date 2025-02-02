@@ -21,7 +21,7 @@ class ExpenseController extends Controller
     public function create()
     {
 
-        $groups =  Group::where('user_id', Auth::id())->get();
+        $groups = Auth::user()->groups;
 
         $categories = Category::where('user_id', Auth::id())->get();
         return view('expenses.create')->with([
