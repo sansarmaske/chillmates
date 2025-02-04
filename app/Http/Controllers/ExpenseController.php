@@ -49,7 +49,7 @@ class ExpenseController extends Controller
             'group' => [
                 'required',
                 function ($attribute, $value, $fail) {
-                    if (!Group::where('id', $value)->where('user_id', Auth::id())->exists()) {
+                    if (!Auth::user()->groups->contains('id', $value)) {
                         $fail('The selected group is invalid.');
                     }
                 },
@@ -57,7 +57,8 @@ class ExpenseController extends Controller
             'category' => [
                 'required',
                 function ($attribute, $value, $fail) {
-                    if (!Category::where('id', $value)->where('user_id', Auth::id())->exists()) {
+                    if (!Category::where('id', $value)) {
+                  //if (!Category::where('id', $value)->where('user_id', Auth::id())->exists()) {
                         $fail('The selected category is invalid.');
                     }
                 },
