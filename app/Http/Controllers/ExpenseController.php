@@ -35,7 +35,7 @@ class ExpenseController extends Controller
 
         $groups = Auth::user()->groups;
 
-        $categories = Category::where('user_id', Auth::id())->get();
+        $categories = Category::get();
         return view('expenses.create')->with([
             'categories' => $categories,
             'groups' => $groups
