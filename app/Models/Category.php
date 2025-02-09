@@ -21,4 +21,9 @@ class Category extends Model
     {
         return $this->hasMany(Expense::class);
     }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }
