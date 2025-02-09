@@ -21,8 +21,15 @@ class ExpenseController extends Controller
 
     public function family()
     {
+        $group = Auth::user()->groups->firstWhere('type', 'family');
+        if (!$group) {
+            abort(404);
+        }
 
-        $expenses = Expense::where('group_id', Auth::user()->groups->firstWhere('type', 'family')->id)->with('user', 'category', 'group')->latest()->get();
+        $expenses = Expense::where('group_id', $group->id)->with('user', 'category', 'group')->latest()->get();
+        if ($expenses->isEmpty()) {
+            abort(404);
+        }
 
 
         return view('expenses.index')->with('expenses', $expenses);
