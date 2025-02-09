@@ -10,7 +10,7 @@ class Category extends Model
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
 
-    protected $fillable = [ 'name', 'user_id',];
+    protected $fillable = [ 'name', 'user_id', 'group_id'];
 
     public function user()
     {

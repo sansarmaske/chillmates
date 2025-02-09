@@ -30,10 +30,19 @@ class CategoryController extends Controller
 
         request()->validate([
             'name' => 'required|string|max:255',
+            'group' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    if (!Auth::user()->groups->contains('id', $value)) {
+                        $fail('The selected group is invalid.');
+                    }
+                },
+            ],
         ]);
 
         Category::create([
             'name' => request('name'),
+            'group_id' => request('group'),
             'user_id' => Auth::id(),
         ]);
         Session::flash('message', 'Category added');
