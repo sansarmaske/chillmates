@@ -38,12 +38,12 @@ class ExpenseController extends Controller
     public function create()
     {
 
-        $groups = Auth::user()->groups;
+
 
         $categories = Category::get();
         return view('expenses.create')->with([
             'categories' => $categories,
-            'groups' => $groups
+            'groups' =>  Auth::user()->groups,
         ]);
     }
 

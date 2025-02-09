@@ -20,7 +20,9 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('categories.create');
+        return view('categories.create')->with([
+            'groups' => Auth::user()->groups,
+        ]);
     }
 
     public function store()
