@@ -27,9 +27,7 @@ class ExpenseController extends Controller
         }
 
         $expenses = Expense::where('group_id', $group->id)->with('user', 'category', 'group')->latest()->get();
-        if ($expenses->isEmpty()) {
-            abort(404);
-        }
+
 
 
         return view('expenses.index')->with('expenses', $expenses);
