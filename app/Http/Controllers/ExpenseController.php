@@ -101,9 +101,18 @@ class ExpenseController extends Controller
             'title' => 'required',
             'amount' => 'required|numeric',
             'description' => 'nullable',
+            'category' => [
+                'required',
+                function ($attribute, $value, $fail) {
+                    //todo: refactor to validate if the category is belongs to the group where the user belongs
+                    if (!Category::where('id', $value)) {
+                        $fail('The selected category is invalid.');
+                    }
+                },
+            ],
         ]);
 
-        if ($expense->user->isNot(Auth::user())) {
+        if ($expense->user->isNot(Auth::user()) || !Auth::user()->groups->contains($expense->group)) {
             abort(403);
         }
 
@@ -111,6 +120,7 @@ class ExpenseController extends Controller
             'title' => request('title'),
             'amount' => request('amount'),
             'description' => request('description'),
+            'category_id' => request('category'),
         ]);
 
         Session::flash('message', 'Record has been updated');
