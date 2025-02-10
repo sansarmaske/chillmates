@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses');
-    Route::get('/expenses/create', [ExpenseController::class, 'create'])->name('expenses.create');
+    Route::get('/expenses/create/{group_id}', [ExpenseController::class, 'create'])->name('expenses.create');
     Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
     Route::get('/expenses/{expense}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
     Route::patch('/expenses/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');

@@ -12,11 +12,15 @@ use App\Models\Group;
 
 class ExpenseController extends Controller
 {
-    //
+    //todo: refactor to merge index and family methods
     public function index()
     {
+        $group = Auth::user()->groups->firstWhere('type', 'personal');
         $expenses = Expense::where('user_id', Auth::id())->with('user', 'category', 'group')->latest()->get();
-        return view('expenses.index')->with('expenses', $expenses);
+        return view('expenses.index')->with([
+            'expenses' => $expenses,
+            'group' => $group,
+        ]);
     }
 
     public function family()
@@ -30,16 +34,22 @@ class ExpenseController extends Controller
 
 
 
-        return view('expenses.index')->with('expenses', $expenses);
+        return view('expenses.index')->with([
+            'expenses' => $expenses,
+            'group' => $group,
+        ]);
     }
 
 
 
-    public function create()
+    public function create($group_id = NULL)
     {
+        dd($group_id);
+        //todo: validate group_id
 
 
 
+        //todo: fetch categories based on the group
         $categories = Category::get();
         return view('expenses.create')->with([
             'categories' => $categories,
@@ -63,7 +73,7 @@ class ExpenseController extends Controller
                 'required',
                 function ($attribute, $value, $fail) {
                     if (!Category::where('id', $value)) {
-                  //if (!Category::where('id', $value)->where('user_id', Auth::id())->exists()) {
+                        //if (!Category::where('id', $value)->where('user_id', Auth::id())->exists()) {
                         $fail('The selected category is invalid.');
                     }
                 },

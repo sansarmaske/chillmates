@@ -15,7 +15,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-end">
-                        <a href="{{ route('expenses.create') }}"
+                        <a href="{{ route('expenses.create', ['group_id' => $group->id]) }}"
                             class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Add
                             Expense</a>
                     </div>
