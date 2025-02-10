@@ -42,15 +42,15 @@ class ExpenseController extends Controller
 
 
 
-    public function create($group_id = NULL)
+    public function create($group_id)
     {
-        dd($group_id);
-        //todo: validate group_id
 
+        $group = Group::find($group_id);
+        if (!$group || !Auth::user()->groups->contains($group)) {
+            abort(403, 'Unauthorized action.');
+        }
 
-
-        //todo: fetch categories based on the group
-        $categories = Category::get();
+        $categories = Category::where('group_id', $group->id)->get();
         return view('expenses.create')->with([
             'categories' => $categories,
             'groups' =>  Auth::user()->groups,

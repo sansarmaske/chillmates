@@ -14,24 +14,6 @@
 
                     <form action="{{route('expenses.store')}}" method="POST">
                         @csrf
-
-
-                        <div class="mb-4">
-                            <label for="group" class="sr-only">Group</label>
-                            <select name="group" id="group" class="bg-gray-100 w-full p-4 rounded-sm @error('group') border-red-500 @enderror">
-                                <option value="">Select Group</option>
-                                @foreach ($groups as $group)
-                                    <option value="{{$group->id}}">{{$group->name}}</option>
-                                @endforeach
-                            </select>
-
-                            @error('group')
-                                <div class="text-red-500 mt-2 text-sm">
-                                    {{$message}}
-                                </div>
-                            @enderror
-                        </div>
-
                         <div class="mb-4">
                             <label for="category" class="sr-only">Category</label>
                             <select name="category" id="category" class="bg-gray-100 w-full p-4 rounded-sm @error('category') border-red-500 @enderror">
