@@ -59,21 +59,12 @@ class ExpenseController extends Controller
 
     public function store()
     {
-
         request()->validate([
-            'group' => [
-                'required',
-                function ($attribute, $value, $fail) {
-                    if (!Auth::user()->groups->contains('id', $value)) {
-                        $fail('The selected group is invalid.');
-                    }
-                },
-            ],
             'category' => [
                 'required',
                 function ($attribute, $value, $fail) {
+                    //todo: refactor to validate if the category is belongs to the group where the user belongs
                     if (!Category::where('id', $value)) {
-                        //if (!Category::where('id', $value)->where('user_id', Auth::id())->exists()) {
                         $fail('The selected category is invalid.');
                     }
                 },
@@ -85,7 +76,7 @@ class ExpenseController extends Controller
 
 
         Expense::create([
-            'group_id' => request('group'),
+            'group_id' => Category::find(request('category'))->group_id,
             'category_id' => request('category'),
             'title' => request('title'),
             'amount' => request('amount'),
