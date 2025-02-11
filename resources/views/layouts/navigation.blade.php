@@ -15,10 +15,10 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('expenses')" :active="request()->routeIs('expenses')">
+                    <x-nav-link :href="route('expenses', ['group_id' => Auth::user()->groups->firstWhere('type', 'personal')->id])" :active="request()->routeIs('expenses') && request()->group_id == Auth::user()->groups->firstWhere('type', 'personal')->id">
                         {{ __('Personal Expenses') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('expenses.family')" :active="request()->routeIs('expenses.family')">
+                    <x-nav-link :href="route('expenses', ['group_id' => Auth::user()->groups->firstWhere('type', 'family')->id])" :active="request()->routeIs('expenses') && request()->group_id == Auth::user()->groups->firstWhere('type', 'family')->id">
                         {{ __(' Family Expenses') }}
                     </x-nav-link>
                     <x-nav-link :href="route('categories')" :active="request()->routeIs('categories')">

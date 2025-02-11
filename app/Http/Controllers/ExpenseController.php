@@ -13,34 +13,18 @@ use App\Models\Group;
 class ExpenseController extends Controller
 {
     //todo: refactor to merge index and family methods
-    public function index()
+    public function index($group_id = NULL)
     {
-        $group = Auth::user()->groups->firstWhere('type', 'personal');
-        $expenses = Expense::where('user_id', Auth::id())->with('user', 'category', 'group')->latest()->get();
-        return view('expenses.index')->with([
-            'expenses' => $expenses,
-            'group' => $group,
-        ]);
-    }
-
-    public function family()
-    {
-        $group = Auth::user()->groups->firstWhere('type', 'family');
-        if (!$group) {
+        $group = Group::find($group_id);
+        if (!$group || !Auth::user()->groups->contains($group)) {
             abort(404);
         }
-
         $expenses = Expense::where('group_id', $group->id)->with('user', 'category', 'group')->latest()->get();
-
-
-
         return view('expenses.index')->with([
             'expenses' => $expenses,
             'group' => $group,
         ]);
     }
-
-
 
     public function create($group_id)
     {
@@ -85,7 +69,7 @@ class ExpenseController extends Controller
         ]);
 
         Session::flash('message', 'Expense added');
-        return redirect(route('expenses'));
+        return redirect(route('expenses', ['group_id' => Category::find(request('category'))->group_id]));
     }
 
     public function edit(Expense $expense)
@@ -124,7 +108,7 @@ class ExpenseController extends Controller
         ]);
 
         Session::flash('message', 'Record has been updated');
-        return redirect(route('expenses'));
+        return redirect(route('expenses', ['group_id' => Category::find(request('category'))->group_id]));
     }
 
     public function destroy(Expense $expense)
