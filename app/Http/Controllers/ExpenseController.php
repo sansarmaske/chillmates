@@ -113,12 +113,14 @@ class ExpenseController extends Controller
 
     public function destroy(Expense $expense)
     {
-        if ($expense->user->isNot(Auth::user())) {
+
+        if ($expense->user->isNot(Auth::user()) || !Auth::user()->groups->contains($expense->group)) {
             abort(403);
         }
         $expense->delete();
 
         Session::flash('message', 'Record has been deleted');
-        return redirect(route('expenses'));
+
+        return redirect(route('expenses', ['group_id' => $expense->group_id]));
     }
 }
