@@ -79,6 +79,15 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('expenses', ['group_id' => Auth::user()->groups->firstWhere('type', 'personal')->id])" :active="request()->routeIs('expenses') && request()->group_id == Auth::user()->groups->firstWhere('type', 'personal')->id">
+                {{ __('Personal Expenses') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('expenses', ['group_id' => Auth::user()->groups->firstWhere('type', 'family')->id])" :active="request()->routeIs('expenses') && request()->group_id == Auth::user()->groups->firstWhere('type', 'family')->id">
+                {{ __(' Family Expenses') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('categories')" :active="request()->routeIs('categories')">
+                {{ __('Categories') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
