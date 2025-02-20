@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Observers\UserObserver;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Group;
 
 
 
@@ -30,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Model::preventLazyLoading();
         User::observe(UserObserver::class);
 
-        Gate::define('is-group-member', function ($user, $group = NULL) {
+        Gate::define('access-group', function ($user, $group) {
             return $user->groups->contains($group);
         });
     }

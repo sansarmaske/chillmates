@@ -17,7 +17,6 @@ class ExpenseController extends Controller
     {
 
         $group = Group::find($group_id);
-        Gate::authorize('is-group-member', $group);
 
         $expenses = Expense::where('group_id', $group->id)->with('user', 'category', 'group')->latest()->get();
         return view('expenses.index')->with([
@@ -30,7 +29,6 @@ class ExpenseController extends Controller
     {
 
         $group = Group::find($group_id);
-        Gate::authorize('is-group-member', $group);
 
         $categories = Category::where('group_id', $group->id)->get();
         return view('expenses.create')->with([
