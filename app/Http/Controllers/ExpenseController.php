@@ -7,18 +7,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\Category;
 use App\Models\Group;
+use Illuminate\Support\Facades\Gate;
 
 
 
 class ExpenseController extends Controller
 {
-    //todo: refactor to merge index and family methods
     public function index($group_id = NULL)
     {
+
         $group = Group::find($group_id);
-        if (!$group || !Auth::user()->groups->contains($group)) {
-            abort(404);
-        }
+        Gate::authorize('is-group-member', $group);
+
         $expenses = Expense::where('group_id', $group->id)->with('user', 'category', 'group')->latest()->get();
         return view('expenses.index')->with([
             'expenses' => $expenses,
@@ -30,9 +30,7 @@ class ExpenseController extends Controller
     {
 
         $group = Group::find($group_id);
-        if (!$group || !Auth::user()->groups->contains($group)) {
-            abort(403, 'Unauthorized action.');
-        }
+        Gate::authorize('is-group-member', $group);
 
         $categories = Category::where('group_id', $group->id)->get();
         return view('expenses.create')->with([
