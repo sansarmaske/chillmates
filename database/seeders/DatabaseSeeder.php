@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Expense;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
         ]);
+
+        //Expense::factory(10)->create();
     }
 }
