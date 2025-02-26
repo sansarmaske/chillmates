@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/expenses/{group?}', [ExpenseController::class, 'index'])->name('expenses')->middleware('can:access-group,group');
+    Route::get('/expenses/{group_id?}', [ExpenseController::class, 'index'])->name('expenses')->middleware('can:access-group,group_id');
     Route::get('/expenses/create/{group_id}', [ExpenseController::class, 'create'])->name('expenses.create');
     Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
     Route::get('/expenses/{expense}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
