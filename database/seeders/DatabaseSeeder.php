@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Expense;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
         ]);
+
+        Category::factory(10)->create();
 
         //Expense::factory(10)->create();
     }
