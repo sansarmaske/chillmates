@@ -17,7 +17,11 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'group_id' => 1,
+            'user_id' => 1,
+            'name' => $this->faker->word,
+
+
         ];
     }
 }

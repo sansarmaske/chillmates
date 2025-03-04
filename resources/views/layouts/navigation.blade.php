@@ -18,9 +18,13 @@
                     <x-nav-link :href="route('expenses', ['group_id' => Auth::user()->groups->firstWhere('type', 'personal')->id])" :active="request()->routeIs('expenses') && request()->group_id == Auth::user()->groups->firstWhere('type', 'personal')->id">
                         {{ __('Personal Expenses') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('expenses', ['group_id' => Auth::user()->groups->firstWhere('type', 'family')->id])" :active="request()->routeIs('expenses') && request()->group_id == Auth::user()->groups->firstWhere('type', 'family')->id">
-                        {{ __(' Family Expenses') }}
-                    </x-nav-link>
+
+
+                    @if ( Auth::user()->groups->firstWhere('type', 'family'))
+                        <x-nav-link :href="route('expenses', ['group_id' => $familyGroup->id])" :active="request()->routeIs('expenses') && request()->group_id == $familyGroup->id">
+                            {{ __('Family Expenses') }}
+                        </x-nav-link>
+                    @endif
                     <x-nav-link :href="route('categories')" :active="request()->routeIs('categories')">
                         {{ __('Categories') }}
                     </x-nav-link>
@@ -82,9 +86,11 @@
             <x-responsive-nav-link :href="route('expenses', ['group_id' => Auth::user()->groups->firstWhere('type', 'personal')->id])" :active="request()->routeIs('expenses') && request()->group_id == Auth::user()->groups->firstWhere('type', 'personal')->id">
                 {{ __('Personal Expenses') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('expenses', ['group_id' => Auth::user()->groups->firstWhere('type', 'family')->id])" :active="request()->routeIs('expenses') && request()->group_id == Auth::user()->groups->firstWhere('type', 'family')->id">
-                {{ __(' Family Expenses') }}
-            </x-responsive-nav-link>
+            @if ( Auth::user()->groups->firstWhere('type', 'family'))
+                <x-responsive-nav-link :href="route('expenses', ['group_id' => Auth::user()->groups->firstWhere('type', 'family')->id])" :active="request()->routeIs('expenses') && request()->group_id == Auth::user()->groups->firstWhere('type', 'family')->id">
+                    {{ __('Family Expenses') }}
+                </x-responsive-nav-link>
+            @endif
             <x-responsive-nav-link :href="route('categories')" :active="request()->routeIs('categories')">
                 {{ __('Categories') }}
             </x-responsive-nav-link>
