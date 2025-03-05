@@ -35,35 +35,22 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="title" class="sr-only"">Title</label>
-                            <input type="text" name="title" id="title" placeholder="Title"
-                                class="bg-gray-100 w-full p-4 rounded-sm @error('title') border-red-500 @enderror"
-                                value="{{ $expense->title }}">
-
-                            @error('title')
-                                <div class="text-red-500 mt-2 text-sm">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <x-input-label for="title" :value="__('Title')" />
+                            <x-text-input id="title" name="title" class="w-full" value="{{ $expense->title }}" />
+                            <x-input-error :messages="$errors->get('title')" class="mt-2" />
                         </div>
 
                         <div class="mb-4">
-                            <label for="amount" class="sr-only">Amount</label>
-                            <input type="text" name="amount" id="amount" placeholder="Amount"
-                                class="bg-gray-100 w-full p-4 rounded-sm @error('amount') border-red-500 @enderror"
-                                value="{{ $expense->amount }}">
-
-                            @error('amount')
-                                <div class="text-red-500 mt-2 text-sm">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <x-input-label for="amount" :value="__('Amount')" />
+                            <x-text-input id="amount" name="amount" class="w-full" value="{{ $expense->amount }}"
+                                type="number" />
+                            <x-input-error :messages="$errors->get('amount')" class="mt-2" />
                         </div>
 
                         <div class="mb-4">
-                            <label for="description" class="sr-only">Description</label>
-                            <textarea name="description" id="description" cols="30" rows="4" placeholder="Description"
-                                class="bg-gray-100 w-full p-4 rounded-sm @error('description') border-red-500 @enderror">{{ $expense->description }}</textarea>
+                            <x-input-label for="description" :value="__('Description')" /> <!-- Updated label value -->
+                            <x-text-input :textarea="true" name="description" id="description"
+                                class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ $expense->description }}</x-text-input>
 
                             @error('description')
                                 <div class="text-red-500 mt-2 text-sm">
