@@ -15,6 +15,13 @@
                     <form action="{{ route('expenses.update', $expense->id) }}" method="POST">
                         @csrf
                         @method('PATCH')
+
+                        <div class="mb-4">
+                            <x-input-label for="expense_date" :value="__('Date')" />
+                            <x-text-input id="expense_date" name="expense_date" type="date"
+                                class="w-full cursor-pointer" value="{{ $expense->expense_date->toDateString() }}" />
+                            <x-input-error :messages="$errors->get('expense_date')" class="mt-2" />
+                        </div>
                         <div class="mb-4">
                             <label for="category" class="sr-only">Category</label>
                             <select name="category" id="category"
