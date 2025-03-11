@@ -18,7 +18,7 @@ class ExpenseController extends Controller
 
         $group = Group::find($group_id);
 
-        $expenses = Expense::where('group_id', $group->id)->with('user', 'category', 'group')->latest()->get();
+        $expenses = Expense::where('group_id', $group->id)->with('user', 'category', 'group')->orderBy('expense_date', 'desc')->get();
         return view('expenses.index')->with([
             'expenses' => $expenses,
             'group' => $group,
@@ -39,6 +39,8 @@ class ExpenseController extends Controller
 
     public function store()
     {
+
+
         request()->validate([
             'category' => [
                 'required',
@@ -52,8 +54,8 @@ class ExpenseController extends Controller
             'title' => 'required',
             'amount' => 'required|numeric',
             'description' => 'nullable',
+            'expense_date' => 'required|date',
         ]);
-
 
         Expense::create([
             'group_id' => Category::find(request('category'))->group_id,
@@ -61,6 +63,7 @@ class ExpenseController extends Controller
             'title' => request('title'),
             'amount' => request('amount'),
             'description' => request('description'),
+            'expense_date' => request('expense_date'),
             'user_id' => Auth::id(),
         ]);
 
@@ -81,6 +84,7 @@ class ExpenseController extends Controller
             'title' => 'required',
             'amount' => 'required|numeric',
             'description' => 'nullable',
+            'expense_date' => 'required|date',
             'category' => [
                 'required',
                 function ($attribute, $value, $fail) {
@@ -101,9 +105,10 @@ class ExpenseController extends Controller
             'amount' => request('amount'),
             'description' => request('description'),
             'category_id' => request('category'),
+            'expense_date' => request('expense_date'),
         ]);
 
-        Session::flash('message', 'Record has been updated');
+        Session::flash('message', 'Expense has been updated');
         return redirect(route('expenses', ['group_id' => Category::find(request('category'))->group_id]));
     }
 

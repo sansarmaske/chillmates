@@ -17,6 +17,11 @@ class Expense extends Model
         'user_id',
         'category_id',
         'group_id',
+        'expense_date',
+    ];
+
+    protected $casts = [
+        'expense_date' => 'datetime',
     ];
 
     public function user()
@@ -33,6 +38,4 @@ class Expense extends Model
     {
         return $this->belongsTo(Group::class);
     }
-
-
 }
