@@ -43,13 +43,13 @@ class ExpenseController extends Controller
 
         request()->validate([
             'category' => [
-            'required',
-            function ($attribute, $value, $fail) {
-                //todo: refactor to validate if the category is belongs to the group where the user belongs
-                if (!Category::where('id', $value)) {
-                $fail('The selected category is invalid.');
-                }
-            },
+                'required',
+                function ($attribute, $value, $fail) {
+                    //todo: refactor to validate if the category is belongs to the group where the user belongs
+                    if (!Category::where('id', $value)) {
+                        $fail('The selected category is invalid.');
+                    }
+                },
             ],
             'title' => 'required',
             'amount' => 'required|numeric',
@@ -84,6 +84,7 @@ class ExpenseController extends Controller
             'title' => 'required',
             'amount' => 'required|numeric',
             'description' => 'nullable',
+            'expense_date' => 'required|date',
             'category' => [
                 'required',
                 function ($attribute, $value, $fail) {
@@ -104,9 +105,10 @@ class ExpenseController extends Controller
             'amount' => request('amount'),
             'description' => request('description'),
             'category_id' => request('category'),
+            'expense_date' => request('expense_date'),
         ]);
 
-        Session::flash('message', 'Record has been updated');
+        Session::flash('message', 'Expense has been updated');
         return redirect(route('expenses', ['group_id' => Category::find(request('category'))->group_id]));
     }
 
