@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->decimal('amount', 8, 2);
             $table->text('description')->nullable();
+            $table->date('expense_date');
             $table->timestamps();
         });
     }

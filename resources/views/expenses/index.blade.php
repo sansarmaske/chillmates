@@ -27,7 +27,7 @@
                                     <tr>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Created At</th>
+                                            Date</th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Category</th>
@@ -50,7 +50,8 @@
                                     @foreach ($expenses as $expense)
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $expense->created_at->format('M d') }}</td>
+                                                {{ $expense->expense_date->format('j') }}<sup>{{ $expense->expense_date->format('S') }}</sup> {{ $expense->expense_date->format('F Y') }}
+                                            </td>
                                             <td class="px-6 py-4 whitespace-nowrap">{{ $expense->category->name }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div>

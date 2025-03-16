@@ -14,6 +14,14 @@
 
                     <form action="{{ route('expenses.store') }}" method="POST">
                         @csrf
+
+
+                        <div class="mb-4">
+                            <x-input-label for="expense_date" :value="__('Date')" />
+                            <x-text-input id="expense_date" name="expense_date" type="date" class="mt-1 block w-full cursor-pointer" value="{{ old('expense_date', now()->toDateString()) }}" />
+                            <x-input-error :messages="$errors->get('expense_date')" class="mt-2" />
+                        </div>
+
                         <div class="mb-4">
                             <label for="category" class="sr-only">Category</label>
                             <select name="category" id="category"
@@ -42,7 +50,7 @@
 
 
                             <x-input-label for="amount" :value="__('Amount')" />
-                            <x-text-input id="amount" name="amount" class="mt-1 block w-full" value="{{ old('amount') }}" />
+                            <x-text-input id="amount" name="amount" class="mt-1 block w-full" value="{{ old('amount') }}" type="number" />
                             <x-input-error :messages="$errors->get('amount')" class="mt-2" />
 
 
