@@ -27,13 +27,7 @@
                                     <tr>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Date</th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Category</th>
-                                        <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Title & Description</th>
+                                           Expense</th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Amount</th>
@@ -49,15 +43,16 @@
                                 <tbody class="bg-white divide-y divide-gray-200 text-sm">
                                     @foreach ($expenses as $expense)
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $expense->expense_date->format('j') }}<sup>{{ $expense->expense_date->format('S') }}</sup> {{ $expense->expense_date->format('F Y') }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $expense->category->name }}</td>
+
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div>
+                                                    <span class="text-xs text-gray-500">{{ $expense->expense_date->format('j M Y') }}</span>
                                                     <p class="text-lg font-semibold text-gray-900">{{ $expense->title }}
                                                     </p>
                                                     <p class="text-sm text-gray-500">{{ $expense->description }}</p>
+                                                    <span class="inline-flex items-center rounded bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+                                                        {{ $expense->category->name }}
+                                                    </span>
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-red-500">${{ $expense->amount }}</td>
