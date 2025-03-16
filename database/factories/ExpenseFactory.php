@@ -23,6 +23,7 @@ class ExpenseFactory extends Factory
             'title' => $this->faker->sentence,
             'amount' => $this->faker->randomFloat(2, 1, 1000),
             'description' => substr($this->faker->paragraph, 0, 50),
+            'expense_date' => now(),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
 
