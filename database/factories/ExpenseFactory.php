@@ -18,11 +18,11 @@ class ExpenseFactory extends Factory
     {
         return [
             'user_id' => 1,
-            'group_id' => $this->faker->randomElement([1, 2]),
+            'group_id' => 1,
             'category_id' => \App\Models\Category::factory(),
             'title' => $this->faker->sentence,
             'amount' => $this->faker->randomFloat(2, 1, 1000),
-            'description' => $this->faker->paragraph,
+            'description' => substr($this->faker->paragraph, 0, 50),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
 
