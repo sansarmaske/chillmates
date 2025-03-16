@@ -78,6 +78,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
+
+                        </div>
+                        <div>
+                            {{$expenses->links()}}
                         </div>
                     </div>
                 </div>

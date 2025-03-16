@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
-        Category::factory(10)->create();
+       // Category::factory(10)->create();
 
-        //Expense::factory(10)->create();
+        Expense::factory(10)->create();
     }
 }

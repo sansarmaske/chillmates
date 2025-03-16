@@ -17,8 +17,7 @@ class ExpenseController extends Controller
     {
 
         $group = Group::find($group_id);
-
-        $expenses = Expense::where('group_id', $group->id)->with('user', 'category', 'group')->orderBy('expense_date', 'desc')->get();
+        $expenses = Expense::where('group_id', $group->id)->with('user', 'category', 'group')->orderBy('expense_date', 'desc')->->paginate(10);
         return view('expenses.index')->with([
             'expenses' => $expenses,
             'group' => $group,
