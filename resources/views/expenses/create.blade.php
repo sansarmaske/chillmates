@@ -50,7 +50,7 @@
 
 
                             <x-input-label for="amount" :value="__('Amount')" />
-                            <x-text-input id="amount" name="amount" class="mt-1 block w-full" value="{{ old('amount') }}" type="number" />
+                            <x-text-input id="amount" name="amount" class="mt-1 block w-full" value="{{ old('amount') }}" type="number" step="0.01" />
                             <x-input-error :messages="$errors->get('amount')" class="mt-2" />
 
 
