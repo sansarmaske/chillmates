@@ -40,26 +40,28 @@
                                     @foreach ($expenses as $expense)
                                         <tr>
                                             <td class="px-3 py-2 whitespace-normal">
-                                                <div class="flex items-center">
-                                                    <span class="text-xs text-gray-500 mr-2">{{ $expense->expense_date->format('j M Y') }}</span>
-                                                    <span class="inline-flex items-center rounded bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-800">
-                                                        {{ $expense->category->name }}
-                                                    </span>
+                                                <div class="space-y-1">
+                                                    <div>
+                                                        <span class="text-xs text-gray-500">{{ $expense->expense_date->format('j M Y') }}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="inline-flex items-center rounded bg-red-600 px-1.5 py-0.5 text-xs font-medium text-white">
+                                                            {{ $expense->category->name }}
+                                                        </span>
+                                                    </div>
                                                 </div>
                                                 <p class="text-sm font-semibold text-gray-900 truncate max-w-xs">{{ $expense->title }}</p>
                                                 <p class="text-xs text-gray-500 truncate max-w-xs">{{ $expense->description }}</p>
                                             </td>
                                             <td class="px-3 py-2 whitespace-nowrap">
                                                 <div class="">
-                                                    <span class="text-base font-medium text-red-600">${{ number_format($expense->amount, 2) }}</span>
+                                                    <span class="text-sm font-medium text-red-600">${{ number_format($expense->amount, 2) }}</span>
 
                                                 </div>
                                             </td>
                                             <td class="px-3 py-2 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                    <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 font-semibold uppercase mr-2">
-                                                        {{ substr($expense->user->name, 0, 1) }}
-                                                    </div>
+
                                                     <span class="text-sm text-gray-700">{{ $expense->user->name }}</span>
                                                 </div>
                                             </td>
