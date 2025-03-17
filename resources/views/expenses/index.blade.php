@@ -38,7 +38,7 @@
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200 text-sm">
                                     @foreach ($expenses as $expense)
-                                        <tr>
+                                        <tr class="hover:bg-gray-50 cursor-pointer" onclick="window.location='{{ route('expenses.show', $expense->id) }}'">
                                             <td class="px-3 py-2 whitespace-normal">
                                                 <div class="space-y-1">
                                                     <div>
@@ -61,7 +61,6 @@
                                             </td>
                                             <td class="px-3 py-2 whitespace-nowrap">
                                                 <div class="flex items-center">
-
                                                     <span class="text-sm text-gray-700">{{ $expense->user->name }}</span>
                                                 </div>
                                             </td>

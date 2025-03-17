@@ -22,15 +22,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/expenses/{group_id?}', [ExpenseController::class, 'index'])->name('expenses')->middleware('can:access-group,group_id');
     Route::get('/expenses/create/{group_id}', [ExpenseController::class, 'create'])->name('expenses.create');
+    Route::get('/expenses/family', [ExpenseController::class, 'family'])->name('expenses.family');
     Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
+    Route::get('/expenses/{expense}/show', [ExpenseController::class, 'show'])->name('expenses.show');
     Route::get('/expenses/{expense}/edit', [ExpenseController::class, 'edit'])->name('expenses.edit');
     Route::patch('/expenses/{expense}', [ExpenseController::class, 'update'])->name('expenses.update');
     Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
-
-    Route::get('/expenses/family', [ExpenseController::class, 'family'])->name('expenses.family');
-
+    Route::get('/expenses/{group_id?}', [ExpenseController::class, 'index'])->name('expenses')->middleware('can:access-group,group_id');
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
@@ -45,7 +44,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->name('groups.edit');
     Route::patch('/groups/{group}', [GroupController::class, 'update'])->name('groups.update');
     Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
-
 });
 
 

@@ -75,6 +75,15 @@ class ExpenseController extends Controller
         return view('expenses.edit')->with('expense', $expense);
     }
 
+    public function show(Expense $expense)
+    {
+        if ($expense->user->isNot(Auth::user()) && !Auth::user()->groups->contains($expense->group)) {
+            abort(403);
+        }
+
+        return view('expenses.show')->with('expense', $expense);
+    }
+
     public function update(Expense $expense)
     {
 
