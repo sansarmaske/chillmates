@@ -1,4 +1,4 @@
-name: Laravel
+name: Test Code
 
 on:
   push:
@@ -30,6 +30,13 @@ jobs:
       run: |
         mkdir -p database
         touch database/database.sqlite
+
+    - name: Install Node.js dependencies
+      run: npm install
+
+    - name: Build assets
+      run: npm run build
+      
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       env:
         DB_CONNECTION: sqlite
