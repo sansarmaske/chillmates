@@ -82,5 +82,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 If you have any questions, feel free to reach out:
 
 - **GitHub Issues:** [https://github.com/sansarmaske/kosadecks/issues](https://github.com/sansarmaske/kosadecks/issues)
-- **Email:** [sansarmaske@gmail.com](mailto:sansarmaske@gmail.com)
+
 
