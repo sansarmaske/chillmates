@@ -26,8 +26,10 @@ test('user can invite other user to group', function() {
     $group = Group::factory()->create([
         'user_id' => $user_1->id
     ]);
-    dd($group);
     $group->invite($user_2);
+    //todo: create invite method
+    //todo: assert that invitation is sent by user_1 to user_2
+
 
 });
 
