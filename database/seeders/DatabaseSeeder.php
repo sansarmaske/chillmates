@@ -27,6 +27,5 @@ class DatabaseSeeder extends Seeder
        // Category::factory(10)->create();
 
         Expense::factory(50)->create();
-        GroupInvite::factory(20)->create();
     }
 }
