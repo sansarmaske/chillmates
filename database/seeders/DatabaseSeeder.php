@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\Expense;
 use App\Models\Category;
+use App\Models\GroupInvite;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
        // Category::factory(10)->create();
 
         Expense::factory(50)->create();
+        GroupInvite::factory(20)->create();
     }
 }

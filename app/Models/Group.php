@@ -26,4 +26,9 @@ class Group extends Model
     {
         return $this->hasMany(Category::class);
     }
+
+    public function invite(User $user)
+    {
+
+    }
 }
