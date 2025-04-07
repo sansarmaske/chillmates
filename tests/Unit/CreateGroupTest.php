@@ -27,8 +27,7 @@ test('user can invite other user to group', function () {
     $group = Group::factory()->create([
         'user_id' => $from_user->id
     ]);
-    $group->invite($to_user);
-    $group_invite = GroupInvite::factory()->create([
+    GroupInvite::factory()->create([
         'group_id' => $group->id,
         'from_user_id' => $from_user->id,
         'to_user_id' => $to_user->id,
