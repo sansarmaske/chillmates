@@ -1,6 +1,6 @@
 <?php
 
-use Tests\TestCase;
+
 
 use App\Models\Expense;
 use App\Models\User;
@@ -9,38 +9,28 @@ use App\Models\Group;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\GroupInvite;
 
-uses(TestCase::class, RefreshDatabase::class);
-
-
-test('user can create group', function () {
-    $user = User::factory()->create();
-    $group = Group::factory()->create([
-        'user_id' => $user->id
-    ]);
-    expect($group->user_id)->toBe($user->id);
-});
+uses(RefreshDatabase::class);
 
 
 test('user can invite other user to group', function () {
-    $from_user = User::factory()->create();
+    $member = User::factory()->create();
     $to_user = User::factory()->create();
-    $group = Group::factory()->create([
-        'user_id' => $from_user->id
-    ]);
-    GroupInvite::factory()->create([
-        'group_id' => $group->id,
-        'from_user_id' => $from_user->id,
-        'to_user_id' => $to_user->id,
+    $group = Group::factory()->create();
+    $group->users()->attach($member);
 
+    $this->actingAs($member);
+
+    $response = $this->post('groups/' . $group->id . '/invite', [
+        'to_user_id' => $to_user->id
     ]);
+
 
     $this->assertDatabaseHas('group_invites', [
         'group_id' => $group->id,
-        'from_user_id' => $from_user->id,
         'to_user_id' => $to_user->id,
+        'from_user_id' => $member->id,
         'status' => 'pending'
     ]);
-
 });
 
 test('user cannot invite other user to group they dont belong to', function () {
@@ -51,7 +41,7 @@ test('user cannot invite other user to group they dont belong to', function () {
     $this->actingAs($nonMember);
 
     $response = $this->post('groups/' . $group->id . '/invite', [
-        'user_id' => $to_user->id
+        'to_user_id' => $to_user->id
     ]);
 
     $response->assertStatus(403);

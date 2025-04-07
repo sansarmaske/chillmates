@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->name('groups.edit');
     Route::patch('/groups/{group}', [GroupController::class, 'update'])->name('groups.update');
     Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
+
+    Route::post('/groups/{group}/invite', [GroupController::class, 'invite'])->name('groups.invite')->middleware('can:access-group,group');
 });
 
 
