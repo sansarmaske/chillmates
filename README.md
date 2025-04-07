@@ -20,8 +20,6 @@ Chillmates is a web application designed to help individuals, families, and room
 
 - **Finance Tracking**: Record and categorize expenses and incomes.
 - **Chore Management**: Assign and track household chores.
-- **User Authentication**: Secure login and registration for users.
-- **Responsive Design**: Accessible on various devices.
 
 ## Installation
 
